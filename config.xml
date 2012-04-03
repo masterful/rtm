@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:rim="http://www.blackberry.com/ns/widgets" version="0.1.0" rim:header="RIM-Widget:rim/widget">
+	<name>RTM Viewer</name>
+	<description>Help yourself remember tasks, grocery items, and whatever else you may want to remind yourself of.</description>
+	<author rim:copyright="2012">Pieter Vermeyden and Remember the Milk</author>
+
+	<icon src="img/icon.png" />
+	<content src="index.html" />
+	
+	<rim:orientation mode="landscape" />
+	
+	<access subdomains="true" uri="https://rememberthemilk.com"/>
+	
+	<feature id="blackberry.app" required="true" version="1.0.0.0"/>
+	<feature id="blackberry.identity" required="true" version="1.0.0.0"/>
+	<feature id="blackberry.invoke.BrowserArguments" required="true" version="1.0.0.0"/>
+	<feature id="blackberry.invoke" required="true" version="1.0.0.0"/>
+</widget>

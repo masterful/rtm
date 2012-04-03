@@ -1,0 +1,29 @@
+
+
+html,
+body {
+	font-family: "Myriad", "Myriad Pro", "Arial", "sans-serif";
+	font-size: 21px;
+	
+	.centered {
+		display: block;
+		margin: 0 auto;
+	}
+	
+	.centered-text {
+		text-align: center;
+	}
+	
+	a.button {
+		.size( 100px, 23px );
+		padding: 2px 10px;
+		border-radius: 3px;
+		border: 1px solid @light-grey;
+		background: -webkit-gradient( linear, 0% 0%, 0% 100%, from(@medium-blue), to(@light-blue) );
+		color: @dark-blue !important;
+		text-decoration: none;
+		&:hover {
+			background: -webkit-gradient( linear, 0% 0%, 0% 100%, from(@light-blue), to(@medium-blue) );
+		}
+	}
+}
