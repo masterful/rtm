@@ -2,6 +2,8 @@
  *	Woot - we have database functionality!
  */
 
+//@codekit-prepend "db-structure.js";
+
 var db	= {
 	_title		: 'rtm'
 	, _version	: '0.1'
