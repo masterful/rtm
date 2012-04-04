@@ -17,13 +17,13 @@
 			.append($('<a>', { 'class' : 'close', href:'#' }).html('x')).fadeIn(400).delay(6000).fadeOut(400);
 	};
 	$.showMessage	= function( name, message ) {
-		var c = $('<div>', { 'class': 'message' }).appendTo($('#messages'))
+		var c = $('<div>', { 'class': 'message' }).appendTo($('#messages'));
 		$('<strong>').html(name).appendTo(c);
 		c.append(message)
 			.append($('<a>', { 'class' : 'close', href:'#' }).html('x')).fadeIn(400).delay(6000).fadeOut(400);
 	};
 	$.showProgress	= function( name, message, id ) {
-		var c = $('<div>', { 'class': 'message', 'id': id }).appendTo($('#messages'))
+		var c = $('<div>', { 'class': 'message', 'id': id }).appendTo($('#messages'));
 		$('<strong>').html(name).appendTo(c);
 		c.append(message)
 			.append($('<a>', { 'class' : 'close', href:'#' }).html('x')).fadeIn(400);

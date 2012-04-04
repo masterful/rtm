@@ -1,7 +1,8 @@
 $(function() {
 	$('#modals').on('click', function(e) {
-		if ( $(e.target).is($( this )) || $(e.target).hasClass('close') )
+		if ( $(e.target).is($( this )) || $(e.target).hasClass('close') ) {
 			$( this ).fadeOut( 200 ).children().remove();
+		}
 	});
 	$('#messages').on('click', 'a.close', function(e) {
 		e.preventDefault();
@@ -18,7 +19,7 @@ $(function() {
 	});
 	$('#lists').on('click', 'a', function( e ) {
 		e.preventDefault();
-		if ( $( this ).parents('li').hasClass('selected') ) return;
+		if ( $( this ).parents('li').hasClass('selected') ) { return; }
 		$( this ).parents('li').addClass('selected').siblings().removeClass('selected');
 		RTM.reload('list', function() {
 			$('#list a:first').trigger('click');
@@ -26,25 +27,27 @@ $(function() {
 	});
 	$('#list').on('click', 'a', function( e ) {
 		e.preventDefault();
-		if ( $( this ).parents('li').hasClass('selected') ) return;
+		if ( $( this ).parents('li').hasClass('selected') ) { return; }
 		$( this ).parents('li').addClass('selected').siblings().removeClass('selected');
 		RTM.reload('task');
 	});
 	$('#buttons').on('click', 'a.reload', function( e ) {
 		e.preventDefault();
-		if ($(this).hasClass('loading')) return;
+		if ($(this).hasClass('loading')) { return; }
 		$(this).addClass('loading');
 		var self	 = this;
 		RTM.synchronize('all', function() {
-			$.showProgress('Synchronizing', '(' + RTM.num_synced + ' items)' + 
+			$.showProgress('Synchronizing', '(' + RTM.num_synced + ' items)' +
 					(RTM.num_synced>50?' This may take a while':''), 'sync_message');
 			//reload page
 			RTM.reload( 'lists', function() {
-				if (1 > $('#lists li.selected').length)
+				if (1 > $('#lists li.selected').length) {
 					$('#lists li:first').addClass('selected');
+				}
 				RTM.reload( 'list', function() {
-					if (1 > $('#list li.selected').length)
+					if (1 > $('#list li.selected').length) {
 						$('#list li:first').addClass('selected');
+					}
 					RTM.reload( 'task', function() {
 						$('#sync_message').fadeOut(700).delay(700).remove();
 						$(self).removeClass('loading');
@@ -80,15 +83,17 @@ $(function() {
 		RTM.authenticate( '', function() {
 			$.showSuccess('','Welcome back, ' + RTM.user.fullname + '.');
 			RTM.synchronize('all', function() {
-				$.showProgress('Synchronizing', '(' + RTM.num_synced + ' items)' + 
+				$.showProgress('Synchronizing', '(' + RTM.num_synced + ' items)' +
 						(RTM.num_synced>50?' This may take a while':''), 'sync_message');
 				//reload page
 				RTM.reload( 'lists', function() {
-					if (1 > $('#lists li.selected').length)
+					if (1 > $('#lists li.selected').length) {
 						$('#lists li:first').addClass('selected');
+					}
 					RTM.reload( 'list', function() {
-						if (1 > $('#list li.selected').length)
+						if (1 > $('#list li.selected').length) {
 							$('#list li:first').addClass('selected');
+						}
 						RTM.reload( 'task', function() {
 							$('#sync_message').fadeOut(700).delay(700).remove();
 							$('#buttons a.reload').removeClass('loading');

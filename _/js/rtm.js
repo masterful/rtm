@@ -1,7 +1,6 @@
 /**
  *	This houses the RTM object, which does all the grunt work for communicating with RTM
  */
-
 var RTM	= {
 	//"static" variables:
 	_url			: 'https://api.rememberthemilk.com/services/rest/?'
@@ -12,7 +11,7 @@ var RTM	= {
 	, authenticated	: false
 	, user			: {}
 	, num_synced	: 0
-	
+
 	//need this function to pass parameters properly ...
 	, serialize	: function( obj ) {
 		var a = [], i, o, sig, ser = '';
@@ -32,7 +31,7 @@ var RTM	= {
 		});
 		return 'api_sig=' + MD5(sig).toLowerCase() + ser;
 	}
-	
+
 	//this will make all the calls, merging in the params with the ones we need
 	, call		: function( params ) {
 		var p	= {
@@ -41,7 +40,7 @@ var RTM	= {
 			, format	: 'json'
 			, method	: 'rtm.test.echo'
 		};
-		if ( this._auth_token ) p.auth_token	= this._auth_token;
+		if ( this._auth_token ) { p.auth_token	= this._auth_token; }
 		$.extend(p, params);
 		if ( 'function' === typeof p.callback ) {
 			this.handlers.push(p.callback);
@@ -58,7 +57,7 @@ var RTM	= {
 			this.handlers.shift()(data);
 		}
 	}
-	
+
 	//two test functions to make sure we can make calls
 	, test		: function( data ) {
 		$.debug( data );
@@ -66,7 +65,7 @@ var RTM	= {
 	, echo		: function() {
 		this.call({ name : 'Pim' });
 	}
-	
+
 	//authenticate
 	, authenticate	: function( stage, callback ) {
 		var self	= this;
@@ -112,7 +111,7 @@ var RTM	= {
 							});
 							self.authenticated		= true;
 							self._auth_token		= data.rsp.auth.token;
-							if ( callback ) callback();
+							if ( callback ) { callback(); }
 						}
 					});
 				}
@@ -176,7 +175,7 @@ var RTM	= {
 								self.user			= data.rsp.auth.user;
 								self.authenticated	= true;
 								self._auth_token	= data.rsp.auth.token;
-								if ( callback ) callback();
+								if ( callback ) { callback(); }
 							}else{
 								//invalidate this token
 								db.update('rtm_token', token, { valid : 0 });
@@ -224,7 +223,7 @@ var RTM	= {
 							self.num_synced ++;
 						});
 					}
-					if (callback) callback();
+					if (callback) { callback(); }
 				}
 			});
 			break;
@@ -248,7 +247,7 @@ var RTM	= {
 						//overwrite our local table with the new data:
 						$.each(data.rsp.tasks.list, function(i, list) {
 							//some of these don't have a task series ... so we'll skip those
-							if ( ! list.taskseries ) return;
+							if ( ! list.taskseries ) { return; }
 							if ( ! $.isArray(list.taskseries) ) {
 								//and if there's only one taskseries
 								list.taskseries		= [list.taskseries];
@@ -316,7 +315,7 @@ var RTM	= {
 							});
 						});
 					}
-					if (callback) callback();
+					if (callback) { callback(); }
 				}
 			});
 			break;
@@ -339,7 +338,7 @@ var RTM	= {
 							self.num_synced++;
 						});
 					}
-					if (callback) callback();
+					if (callback) { callback(); }
 				}
 			});
 			break;
@@ -348,7 +347,7 @@ var RTM	= {
 			//smart lists need some special handling because I don't feel like applying filters
 			db.select('rtm_list', { smart: '1', deleted: '0', archived: '0' }, {}, function( tx, rs ) {
 				if ( ! rs.rows.length ) {
-					if (callback) callback();
+					if (callback) { callback(); }
 					return;
 				}
 				for (var i = 0; i<rs.rows.length; i++) {
@@ -377,7 +376,7 @@ var RTM	= {
 								//overwrite our local table with the new data:
 								$.each(data.rsp.tasks.list, function(i, list) {
 									//some of these don't have a task series ...
-									if ( ! list.taskseries ) return;
+									if ( ! list.taskseries ) { return; }
 									//and if there's only one, it's returned as an object:
 									if ( ! $.isArray(list.taskseries) ) {
 										list.taskseries		= [list.taskseries];
@@ -392,7 +391,7 @@ var RTM	= {
 									});
 								});
 							}
-							if (callback) callback();
+							if (callback) { callback(); }
 						}
 					});
 				}
@@ -405,8 +404,8 @@ var RTM	= {
 				//beginning of time (not really):
 				//to prevent caching, change the time ...
 				var d			= new Date();
-				self.sync_all	= '1990-01-01T0' + (d.getHours()%10) + 
-												':' + (d.getMinutes()) + 
+				self.sync_all	= '1990-01-01T0' + (d.getHours()%10) +
+												':' + (d.getMinutes()) +
 												':' + (d.getSeconds()) + 'Z';
 				if (rs.rows.length) {
 					self.last_sync	= rs.rows.item(0).value;
@@ -427,7 +426,7 @@ var RTM	= {
 										((d.getSeconds()<10)?'0':'')+d.getSeconds()+'Z';
 								db.safeInsert('setting', { name: 'last_sync', value: date });
 								//give callback
-								if ( callback ) callback();
+								if ( callback ) { callback(); }
 							});
 						});
 					});
@@ -441,8 +440,8 @@ var RTM	= {
 				//beginning of time (not really):
 				//to prevent caching, change the time ...
 				var d			= new Date();
-				self.sync_all	= '1990-01-01T0' + (d.getHours()%10) + 
-												':' + (d.getMinutes()) + 
+				self.sync_all	= '1990-01-01T0' + (d.getHours()%10) +
+												':' + (d.getMinutes()) +
 												':' + (d.getSeconds()) + 'Z';
 				if (rs.rows.length) {
 					self.last_sync	= rs.rows.item(0).value;
@@ -462,7 +461,7 @@ var RTM	= {
 									((d.getSeconds()<10)?'0':'')+d.getSeconds()+'Z';
 							db.safeInsert('setting', { name: 'last_sync', value: date });
 							//give callback
-							if ( callback ) callback();
+							if ( callback ) { callback(); }
 						});
 					});
 				});
@@ -474,7 +473,7 @@ var RTM	= {
 		var self	= this;
 		switch( which ) {
 		case 'task':
-			var months		= ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 
+			var months		= ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
 								'September', 'October', 'November', 'December']
 				, days		= ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 				, frequency	= { WEEKLY : 'week', DAILY : 'day', MONTHLY : 'month', YEARLY : 'year' }
@@ -489,7 +488,7 @@ var RTM	= {
 					//did we get a task?
 					if ( ! rs.rows.length ) {
 						$.showError('', 'Couldn\'t find that task.');
-						if ( callback ) callback();
+						if ( callback ) { callback(); }
 						return;
 					}
 					var task	= rs.rows.item(0);
@@ -498,7 +497,8 @@ var RTM	= {
 						db.select( 'rtm_location', { id : task.location_id }, {}, function(tx, rs) {
 							var location	= (rs.rows.length) ? rs.rows.item(0) : '';
 							db.select( 'rtm_note', { taskseries_id : task.taskseries_id }, {}, function(tx, rs) {
-								var notes	= rs.rows;
+								var notes	= rs.rows
+									, t;	//need to define this here
 								//load in new selection
 								$('#info').children().remove();
 								$('<h1>').html( task.name ).appendTo($('#info'));
@@ -506,10 +506,10 @@ var RTM	= {
 								var dl	= $('<dl>').appendTo($('#info'));
 								if ( task.due ) {
 									var d	= new Date(task.due);
-									d		= days[d.getDay()] + ', &nbsp;' + 
+									d		= days[d.getDay()] + ', &nbsp;' +
 												d.getDate() + ' &nbsp;' +
 												months[d.getMonth()] + ' &nbsp;' +
-												d.getFullYear() + 
+												d.getFullYear() +
 												((task.has_due_time)
 													?' &nbsp; '+((d.getHours()%12)+1)+
 														':'+((d.getMinutes()<10)?'0':'')+d.getMinutes()+
@@ -519,7 +519,7 @@ var RTM	= {
 									$('<dd>').html( d ).appendTo(dl);
 								}
 								if ( tags.length ) {
-									var t	= '';
+									t	= '';
 									for ( var i = 0; i < tags.length; i ++ ) {
 										t	= t + ', ' + tags.item(i).name;
 									}
@@ -536,7 +536,7 @@ var RTM	= {
 								}
 								dl	= $('<dl>').appendTo($('#info'));
 								if ( task.repeat_every ) {
-									var t	= 'every '
+									t	= 'every '
 										, s	= task.repeat_t.split(';')
 										, f	= {};
 									$.each(s, function(i, o) {
@@ -558,22 +558,22 @@ var RTM	= {
 								if ( notes.length ) {
 									dl		= $('<dl>').appendTo($('#info'));
 									$('<dt>').html('Notes').appendTo(dl);
-									for ( var i = 0; i < notes.length; i ++ ) {
-										var note	= notes.item(i)
-											,d		= new Date(note.modified);
-											d		= d.getDate() + ' ' +
-														months[d.getMonth()] + ' ' +
-														d.getFullYear() + ', '+
-														((d.getHours()%12)+1)+
-																':'+((d.getMinutes()<10)?'0':'')+d.getMinutes()+
-																' '+((12>d.getHours())?'am':'pm');
-										$('<span>', { 'class' : 'date' }).html( d ).appendTo($('#info'));
-										if (note.title) $('<h2>').html( note.title ).appendTo($('#info'));
+									for ( var j = 0; j < notes.length; j ++ ) {
+										var note	= notes.item(j);
+										da			= new Date(note.modified);
+										da			= da.getDate() + ' ' +
+														months[da.getMonth()] + ' ' +
+														da.getFullYear() + ', '+
+														((da.getHours()%12)+1)+
+																':'+((da.getMinutes()<10)?'0':'')+da.getMinutes()+
+																' '+((12>da.getHours())?'am':'pm');
+										$('<span>', { 'class' : 'date' }).html( da ).appendTo($('#info'));
+										if (note.title) { $('<h2>').html( note.title ).appendTo($('#info')); }
 										$('<p>').html( note.content ).appendTo($('#info'));
 									}
 								}
 								//callback when we finish
-								if ( callback ) callback();
+								if ( callback ) { callback(); }
 							});
 						});
 					});
@@ -583,10 +583,9 @@ var RTM	= {
 		case 'list':
 			//save current selection
 			var cur			= $('#list li.selected').attr('data-id')
-				, months	= ['January', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August', 'Sept', 'Oct', 'Nov', 'Dec']
-				, days		= ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-				, suffix	= ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th']
-				, query;
+				, suffix	= ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'];
+			months			= ['January', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August', 'Sept', 'Oct', 'Nov', 'Dec'];
+			days			= ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 			db.trans( function(tx) { tx.executeSql(
 				query = 'SELECT ts.*, t.*, t.id task_id ' +
 				'FROM rtm_taskList tl' +
@@ -611,10 +610,10 @@ var RTM	= {
 							, isdue	= today > (due-1*d)	//due within 24 hours
 							, li	= $('<li>', { 'data-id': task.task_id }).appendTo($('#list ul'))
 							, a		= $('<a>', { href: '#' }).appendTo(li);
-						if (isdue) li.addClass('is-due');
+						if (isdue) { li.addClass('is-due'); }
 						$('<span>', { 'class' : 'priority priority-' + task.priority }).appendTo(a);
 						$('<span>', { 'class' : 'task' }).html( task.name ).appendTo(a);
-						if ( isdue && due.getDate() == today.getDate() ) {
+						if ( isdue && due.getDate() === today.getDate() ) {
 							$('<span>', { 'class' : 'due-date' }).html( 'today' ).appendTo(a);
 						}else if ( isdue && today < due ) {
 							$('<span>', { 'class' : 'due-date' }).html( 'tomorrow' ).appendTo(a);
@@ -629,10 +628,10 @@ var RTM	= {
 							$('<span>', { 'class' : 'due-date' }).html( months[due.getMonth()] ).appendTo(a);
 						}
 					}
-					if ( ! rs.rows.length ) $('#info').append('<p>(Cricket, cricket ... there\'s nothing here)</p>');
+					if ( ! rs.rows.length ) { $('#info').append('<p>(Cricket, cricket ... there\'s nothing here)</p>'); }
 					//re-click the item we'd selected from before
 					$('#list li[data-id=' + cur + ']').trigger('click');
-					if ( callback ) callback();
+					if ( callback ) { callback(); }
 				});
 			});
 			break;
@@ -651,7 +650,7 @@ var RTM	= {
 					' OUTER LEFT JOIN rtm_taskSeries ts ON tl.taskseries_id = ts.id' +
 					' OUTER LEFT JOIN rtm_task t ON (' +
 						' ts.id = t.taskseries_id AND' +
-						' t.due < ? AND' + 
+						' t.due < ? AND' +
 						' t.due != \'\' AND' +
 						' t.completed = \'\' AND' +
 						' t.deleted = \'\'' +
@@ -665,20 +664,20 @@ var RTM	= {
 						var list	= rs.rows.item(i)
 							, li	= $('#lists li[data-id=' + list.id + ']')
 							, due	= li.find('.number');
-						if (1 > due.length) due		= $('<div>', { 'class': 'number' }).prependTo(li);
+						if (1 > due.length) {due		= $('<div>', { 'class': 'number' }).prependTo(li); }
 						due.attr('title',list.due).html(list.due);
-						if (1 > parseInt(list.due)) due.remove();
+						if (1 > parseInt(list.due, 1)) { due.remove(); }
 					}
-					if ( callback ) callback();
+					if ( callback ) { callback(); }
 				});
 			});
 			break;
-		case 'lists':
+		//case 'lists':
 		default:
 			//save current selection
-			var cur		= $('#lists li.selected').attr('data-id')
-				, d		= new Date((new Date() - 1))
-				, date	= d.getFullYear()+'-'+
+			cur		= $('#lists li.selected').attr('data-id');
+			d		= new Date((new Date() - 1));
+			date	= d.getFullYear()+'-'+
 							((d.getMonth()<9)?'0':'')+(d.getMonth()+1)+'-'+
 							((d.getDate()<10)?'0':'')+d.getDate()+'T'+
 							((d.getHours()<10)?'0':'')+d.getHours()+':'+
@@ -691,7 +690,7 @@ var RTM	= {
 					' OUTER LEFT JOIN rtm_taskSeries ts ON tl.taskseries_id = ts.id' +
 					' OUTER LEFT JOIN rtm_task t ON (' +
 						' ts.id = t.taskseries_id AND' +
-						' t.due < ? AND' + 
+						' t.due < ? AND' +
 						' t.due != \'\' AND' +
 						' t.completed = \'\' AND' +
 						' t.deleted = \'\'' +
@@ -708,13 +707,13 @@ var RTM	= {
 					for ( var i = 0; i < rs.rows.length; i ++ ) {
 						var list	= rs.rows.item(i)
 							, li	= $('<li>', { 'data-id': list.id });
-						if (list.due) $('<div>', { 'class': 'number', 'title': list.due }).html(list.due).appendTo(li);
+						if (list.due) {$('<div>', { 'class': 'number', 'title': list.due }).html(list.due).appendTo(li); }
 						$('<a>', { href: '#' }).html( list.name ).appendTo(li);
 						li.appendTo($('#lists ul'));
 					}
 					//re-click the item we'd selected from before
 					$('#lists li[data-id=' + cur + ']').trigger('click');
-					if ( callback ) callback();
+					if ( callback ) { callback(); }
 				});
 			});
 		}
@@ -730,7 +729,7 @@ var RTM	= {
 			, function( tx, rs ) {
 				//did we get a task?
 				if ( ! rs.rows.length ) {
-					if (callback) callback();
+					if (callback) { callback(); }
 					$.showError('', 'Task not found.');
 					return;
 				}
@@ -741,7 +740,7 @@ var RTM	= {
 					method			: 'rtm.timelines.create'
 					, 'callback'	: function( data ) {
 						if ( "ok" !== data.rsp.stat || ! data.rsp.timeline ) {
-							if (callback) callback();
+							if (callback) { callback(); }
 							$.showError('', 'Can\'t lock on the target.');
 							return;
 						}
@@ -753,14 +752,14 @@ var RTM	= {
 							, task_id		: task.id
 							, 'callback'	: function( data ) {
 								if ( "ok" !== data.rsp.stat || ! data.rsp.list.taskseries.task ) {
-									if (callback) callback();
+									if (callback) { callback(); }
 									$.showError('', 'I\'m afraid I can\'t let you do that, ' + self.user.fullname + '.');
 									return;
 								}
 								//mark as completed
 								var date	= data.rsp.list.taskseries.task.completed;
 								db.update( 'rtm_task', task, { completed: date }, function( tx, rs ) {
-									if (callback) callback();
+									if (callback) { callback(); }
 								});
 							}
 						});

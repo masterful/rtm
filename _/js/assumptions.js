@@ -3,7 +3,7 @@
 
 if ( undefined === typeof alert ) {			var alert		= function(){}; }
 if ( undefined === typeof console ) {		var console		= {}; }
-if ( undefined === typeof console.log ) {		console.log	= alert }
+if ( undefined === typeof console.log ) {		console.log	= alert; }
 
 //and things I shouldn't be redefining, but will really hurt if they're not there:
 if ( undefined === typeof openDatabase ) { alert('No Database available'); }

@@ -87,7 +87,7 @@ var db	= {
 		if ( ! a.length ) {
 			//no values to insert? don't insert
 			$.debug('Yeah - you didn\'t give me anything to insert');
-			if (callback) callback();
+			if (callback) { callback(); }
 			return;
 		}
 		//finish our query, don't worry about injection on the info (and "i") vars ...
@@ -102,7 +102,7 @@ var db	= {
 				, function( tx, e ) {
 					$.debug('Query failure: ' + query);
 					$.debug(a);
-					if (callback) callback();
+					if (callback) { callback(); }
 					self.error(tx, e);
 				});
 		});
@@ -126,7 +126,7 @@ var db	= {
 		if ( ! a.length ) {
 			//no values to insert? don't insert
 			$.debug('Yeah - you didn\'t give me anything to insert');
-			if (callback) callback();
+			if (callback) { callback(); }
 			return;
 		}
 		query	= 'INSERT INTO ' + table + ' (' + query.substr(1) + ') VALUES (' + val.substr(1) + ')';
@@ -138,7 +138,7 @@ var db	= {
 				, function( tx, e ) {
 					$.debug('Query failure: ' + query);
 					$.debug(a);
-					if (callback) callback();
+					if (callback) { callback(); }
 					self.error(tx, e);
 				});
 		});
@@ -167,7 +167,7 @@ var db	= {
 			}, function( tx, e ) {
 				$.debug('Query failure: ' + query);
 				$.debug(a);
-					if (callback) callback();
+					if (callback) { callback(); }
 				self.error(tx, e);
 			});
 		});
@@ -203,7 +203,7 @@ var db	= {
 				, function( tx, e ) {
 					$.debug('Query failure: ' + query);
 					$.debug(a);
-					if (callback) callback();
+					if (callback) { callback(); }
 					self.error(tx, e);
 				});
 		});
