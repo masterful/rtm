@@ -206,7 +206,7 @@ var RTM	= {
 				//if it's the same, then push the update to online
 			//now, overwrite whatever we have in the local DB
 			self.call({
-				method			: 'rtm.lists.getList'
+				  method		: 'rtm.lists.getList'
 				, last_sync		: self.last_sync
 				, 'callback'	: function( data ) {
 					if ( "ok" !== data.rsp.stat ) {
@@ -224,7 +224,7 @@ var RTM	= {
 							self.num_synced ++;
 						});
 					}
-					if (callback) { callback(); }
+					if ('function' === typeof callback) { callback(); }
 				}
 			});
 			break;
@@ -234,7 +234,7 @@ var RTM	= {
 			//process the synchronization records
 			//now, overwrite whatever we have in the local DB
 			self.call({
-				method			: 'rtm.tasks.getList'
+				  method		: 'rtm.tasks.getList'
 				, last_sync		: self.last_sync
 				, 'callback'	: function( data ) {
 					if ( "ok" !== data.rsp.stat ) {
@@ -316,7 +316,7 @@ var RTM	= {
 							});
 						});
 					}
-					if (callback) { callback(); }
+					if ('function' === typeof callback) { callback(); }
 				}
 			});
 			break;
@@ -325,7 +325,7 @@ var RTM	= {
 			//no synchronization on locations yet :)
 			//so overwrite whatever we have in the local DB
 			self.call({
-				method			: 'rtm.locations.getList'
+				  method		: 'rtm.locations.getList'
 				, 'callback'	: function( data ) {
 					if ( "ok" !== data.rsp.stat ) {
 						$.showError( "Error synchronizing locations: " + data.rsp.err.code );
@@ -339,7 +339,7 @@ var RTM	= {
 							self.num_synced++;
 						});
 					}
-					if (callback) { callback(); }
+					if ('function' === typeof callback) { callback(); }
 				}
 			});
 			break;
