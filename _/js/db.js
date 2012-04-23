@@ -5,7 +5,7 @@
 //@codekit-prepend "db-structure.js";
 
 var db	= {
-	_title		: 'rtm'
+	  _title	: 'rtm'
 	, _version	: '0.1'
 	, _size		: 1000
 	, _desc		: 'The Remember the Milk app!'

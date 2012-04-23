@@ -1,6 +1,6 @@
 var _tables	= {
 	rtm_taskSeries	: {
-		name			: 'Task Series'
+		  name			: 'Task Series'
 		, description	: 'The central table, houses the task series\''
 		, columns		: {
 			id				: 'INTEGER'
@@ -16,7 +16,7 @@ var _tables	= {
 	
 	
 	}, rtm_location	: {
-		name			: 'Location'
+		  name			: 'Location'
 		, description	: 'The locations where tasks are to be done'
 		, columns		: {
 			id				: 'INTEGER'
@@ -30,7 +30,7 @@ var _tables	= {
 	
 	
 	}, rtm_tag		: {
-		name			: 'Tag'
+		  name			: 'Tag'
 		, description	: 'The different tags use to label the tasks'
 		, columns		: {
 			taskseries_id	: 'INTEGER'
@@ -39,7 +39,7 @@ var _tables	= {
 	
 	
 	}, rtm_note		: {
-		name			: 'Note'
+		  name			: 'Note'
 		, description	: 'Notes for task series (if they happen to have any)'
 		, columns		: {
 			id				: 'INTEGER'
@@ -52,7 +52,7 @@ var _tables	= {
 	
 	
 	}, rtm_taskList	: {
-		name			: 'Task-List'
+		  name			: 'Task-List'
 		, description	: 'The relationship table relating lists and task series\' together'
 		, columns		: {
 			taskseries_id	: 'INTEGER'
@@ -62,7 +62,7 @@ var _tables	= {
 	
 	
 	}, rtm_task		: {
-		name			: 'Task'
+		  name			: 'Task'
 		, description	: 'Where the tasks themselves are housed'
 		, columns		: {
 			id				: 'INTEGER'
@@ -78,7 +78,7 @@ var _tables	= {
 	
 	
 	}, rtm_list		: {
-		name			: 'List'
+		  name			: 'List'
 		, description	: 'The various lists we have (both smart and normal)'
 		, columns		: {
 			id				: 'INTEGER'
@@ -95,7 +95,7 @@ var _tables	= {
 	}
 	//and our own tables
 	, rtm_frob		: {
-		name			: 'Frob'
+		  name			: 'Frob'
 		, description	: 'Where we house the frob(s) we use(d) to communicate with RTM'
 		, columns		: {
 			id				: 'INTEGER'
@@ -104,7 +104,7 @@ var _tables	= {
 	
 	
 	}, rtm_token	: {
-		name			: 'Token'
+		  name			: 'Token'
 		, description	: 'Where we keep the token(s) we use(d) to authenticate with RTM'
 		, columns		: {
 			id				: 'INTEGER'
@@ -115,7 +115,7 @@ var _tables	= {
 	
 	
 	}, setting	: {
-		name			: 'Setting'
+		  name			: 'Setting'
 		, description	: 'Where we hold on to our settings for future uses'
 		, columns		: {
 			name			: 'TEXT'

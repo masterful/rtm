@@ -3,14 +3,15 @@
  */
 var RTM	= {
 	//"static" variables:
-	_url			: 'https://api.rememberthemilk.com/services/rest/?'
-	,_auth_url		: 'http://www.rememberthemilk.com/services/auth/?'
+	  _url			: 'https://api.rememberthemilk.com/services/rest/?'
+	, _auth_url		: 'http://www.rememberthemilk.com/services/auth/?'
 	, _auth_token	: ''
-	, _key			: '92bafab75414024a2afee020f11fa5ca'
-	, _secret		: '1050df75d36a4ba7'
 	, authenticated	: false
 	, user			: {}
 	, num_synced	: 0
+	//I'd really appreciate it if you didn't use my API token:
+	, _key			: '92bafab75414024a2afee020f11fa5ca'
+	, _secret		: '1050df75d36a4ba7'
 
 	//need this function to pass parameters properly ...
 	, serialize	: function( obj ) {
@@ -35,7 +36,7 @@ var RTM	= {
 	//this will make all the calls, merging in the params with the ones we need
 	, call		: function( params ) {
 		var p	= {
-			api_key		: this._key
+			  api_key	: this._key
 			, callback	: 'RTM.test'
 			, format	: 'json'
 			, method	: 'rtm.test.echo'

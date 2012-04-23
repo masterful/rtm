@@ -9558,7 +9558,7 @@ var MD5 = function (string) {
 
 var _tables	= {
 	rtm_taskSeries	: {
-		name			: 'Task Series'
+		  name			: 'Task Series'
 		, description	: 'The central table, houses the task series\''
 		, columns		: {
 			id				: 'INTEGER'
@@ -9574,7 +9574,7 @@ var _tables	= {
 	
 	
 	}, rtm_location	: {
-		name			: 'Location'
+		  name			: 'Location'
 		, description	: 'The locations where tasks are to be done'
 		, columns		: {
 			id				: 'INTEGER'
@@ -9588,7 +9588,7 @@ var _tables	= {
 	
 	
 	}, rtm_tag		: {
-		name			: 'Tag'
+		  name			: 'Tag'
 		, description	: 'The different tags use to label the tasks'
 		, columns		: {
 			taskseries_id	: 'INTEGER'
@@ -9597,7 +9597,7 @@ var _tables	= {
 	
 	
 	}, rtm_note		: {
-		name			: 'Note'
+		  name			: 'Note'
 		, description	: 'Notes for task series (if they happen to have any)'
 		, columns		: {
 			id				: 'INTEGER'
@@ -9610,7 +9610,7 @@ var _tables	= {
 	
 	
 	}, rtm_taskList	: {
-		name			: 'Task-List'
+		  name			: 'Task-List'
 		, description	: 'The relationship table relating lists and task series\' together'
 		, columns		: {
 			taskseries_id	: 'INTEGER'
@@ -9620,7 +9620,7 @@ var _tables	= {
 	
 	
 	}, rtm_task		: {
-		name			: 'Task'
+		  name			: 'Task'
 		, description	: 'Where the tasks themselves are housed'
 		, columns		: {
 			id				: 'INTEGER'
@@ -9636,7 +9636,7 @@ var _tables	= {
 	
 	
 	}, rtm_list		: {
-		name			: 'List'
+		  name			: 'List'
 		, description	: 'The various lists we have (both smart and normal)'
 		, columns		: {
 			id				: 'INTEGER'
@@ -9653,7 +9653,7 @@ var _tables	= {
 	}
 	//and our own tables
 	, rtm_frob		: {
-		name			: 'Frob'
+		  name			: 'Frob'
 		, description	: 'Where we house the frob(s) we use(d) to communicate with RTM'
 		, columns		: {
 			id				: 'INTEGER'
@@ -9662,7 +9662,7 @@ var _tables	= {
 	
 	
 	}, rtm_token	: {
-		name			: 'Token'
+		  name			: 'Token'
 		, description	: 'Where we keep the token(s) we use(d) to authenticate with RTM'
 		, columns		: {
 			id				: 'INTEGER'
@@ -9673,7 +9673,7 @@ var _tables	= {
 	
 	
 	}, setting	: {
-		name			: 'Setting'
+		  name			: 'Setting'
 		, description	: 'Where we hold on to our settings for future uses'
 		, columns		: {
 			name			: 'TEXT'
@@ -9693,7 +9693,7 @@ var _tables	= {
 //@codekit-prepend "db-structure.js";
 
 var db	= {
-	_title		: 'rtm'
+	  _title	: 'rtm'
 	, _version	: '0.1'
 	, _size		: 1000
 	, _desc		: 'The Remember the Milk app!'
@@ -9912,14 +9912,15 @@ db.connect();
  */
 var RTM	= {
 	//"static" variables:
-	_url			: 'https://api.rememberthemilk.com/services/rest/?'
-	,_auth_url		: 'http://www.rememberthemilk.com/services/auth/?'
+	  _url			: 'https://api.rememberthemilk.com/services/rest/?'
+	, _auth_url		: 'http://www.rememberthemilk.com/services/auth/?'
 	, _auth_token	: ''
-	, _key			: '92bafab75414024a2afee020f11fa5ca'
-	, _secret		: '1050df75d36a4ba7'
 	, authenticated	: false
 	, user			: {}
 	, num_synced	: 0
+	//I'd really appreciate it if you didn't use my API token:
+	, _key			: '92bafab75414024a2afee020f11fa5ca'
+	, _secret		: '1050df75d36a4ba7'
 
 	//need this function to pass parameters properly ...
 	, serialize	: function( obj ) {
@@ -9944,7 +9945,7 @@ var RTM	= {
 	//this will make all the calls, merging in the params with the ones we need
 	, call		: function( params ) {
 		var p	= {
-			api_key		: this._key
+			  api_key	: this._key
 			, callback	: 'RTM.test'
 			, format	: 'json'
 			, method	: 'rtm.test.echo'
