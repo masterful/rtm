@@ -31,49 +31,51 @@ $(function() {
 		$( this ).parents('li').addClass('selected').siblings().removeClass('selected');
 		RTM.reload('task');
 	});
-	$('#buttons').on('click', 'a.reload', function( e ) {
-		e.preventDefault();
-		if ($(this).hasClass('loading')) { return; }
-		$(this).addClass('loading');
-		var self	 = this;
-		RTM.synchronize('all', function() {
-			$.showProgress('Synchronizing', '(' + RTM.num_synced + ' items)' +
-					(RTM.num_synced>50?' This may take a while':''), 'sync_message');
-			//reload page
-			RTM.reload( 'lists', function() {
-				if (1 > $('#lists li.selected').length) {
-					$('#lists li:first').addClass('selected');
-				}
-				RTM.reload( 'list', function() {
-					if (1 > $('#list li.selected').length) {
-						$('#list li:first').addClass('selected');
+	$('#buttons')
+		.on('click', 'a.reload', function( e ) {
+			e.preventDefault();
+			if ($(this).hasClass('loading')) { return; }
+			$(this).addClass('loading');
+			var self	 = this;
+			RTM.synchronize('all', function() {
+				$.showProgress('Synchronizing', '(' + RTM.num_synced + ' items)' +
+						(RTM.num_synced>50?' This may take a while':''), 'sync_message');
+				//reload page
+				RTM.reload( 'lists', function() {
+					if (1 > $('#lists li.selected').length) {
+						$('#lists li:first').addClass('selected');
 					}
-					RTM.reload( 'task', function() {
-						$('#sync_message').fadeOut(700).delay(700).remove();
-						$(self).removeClass('loading');
-						//I know it's weird, but reloading the lists will get us our numbers
-						RTM.reload( 'numbers' );
+					RTM.reload( 'list', function() {
+						if (1 > $('#list li.selected').length) {
+							$('#list li:first').addClass('selected');
+						}
+						RTM.reload( 'task', function() {
+							$('#sync_message').fadeOut(700).delay(700).remove();
+							$(self).removeClass('loading');
+							//I know it's weird, but reloading the lists will get us our numbers
+							RTM.reload( 'numbers' );
+						});
 					});
 				});
 			});
-		});
-	})
+		})
 		.on('click', 'a.add', function( e ) {
-		e.preventDefault();
-	});
-	$('#info').on('click', 'a.complete', function( e ) {
-		e.preventDefault();
-		if ( $('#buttons .reload').hasClass('loading') ) {
-			$.showError('', 'Please wait until the sync finishes first ...');
-			return;
-		}
-		$('#buttons .reload').addClass('loading');
-		RTM.complete( $( this ).attr('data-id'), function() {
-			RTM.reload('list');
-			RTM.reload('numbers');
-		$('#buttons .reload').removeClass('loading');
+			e.preventDefault();
 		});
-	});
+	$('#info')
+		.on('click', 'a.complete', function( e ) {
+			e.preventDefault();
+			if ( $('#buttons .reload').hasClass('loading') ) {
+				$.showError('', 'Please wait until the sync finishes first ...');
+				return;
+			}
+			$('#buttons .reload').addClass('loading');
+			RTM.complete( $( this ).attr('data-id'), function() {
+					RTM.reload('list');
+					RTM.reload('numbers');
+				$('#buttons .reload').removeClass('loading');
+			});
+		});
 	
 	//don't sync right away - first load everything
 	RTM.reload('lists', function() {
