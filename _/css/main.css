@@ -44,8 +44,8 @@ body {
 html #viewport,
 body #viewport {
   position: relative;
-  width: 1024px;
-  height: 600px;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 html #viewport div,
@@ -96,9 +96,9 @@ html #messages div,
 body #messages div {
   position: relative;
   display: none;
-  width: 994px;
-  padding: 8px 5px;
-  margin: 2px 10px;
+  width: 80%;
+  padding: 8px 2%;
+  margin: 2px 8%;
   border-radius: 5px;
   border: 1px solid #dedede;
 }
@@ -131,12 +131,12 @@ body #messages div a.close {
 html #info,
 body #info {
   background: #c4cfcf;
-  width: 460px;
-  height: 600px;
+  width: 41%;
+  height: 100%;
   float: left;
   overflow-y: auto;
   box-shadow: -5px 0 5px rgba(0, 0, 0, 0.3);
-  padding: 0 20px;
+  padding: 0 3%;
   font-size: 18px;
   line-height: 23px;
 }
@@ -149,7 +149,7 @@ body #info h1 {
 }
 html #info dl dt,
 body #info dl dt {
-  width: 100px;
+  width: 18%;
   text-align: right;
   clear: both;
   color: #918b8b;
@@ -157,13 +157,13 @@ body #info dl dt {
 }
 html #info dl dd,
 body #info dl dd {
-  width: 350px;
+  width: 80%;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   color: #3c3434;
   float: left;
-  margin-left: 10px;
+  margin-left: 2%;
 }
 html #info dl dd:last-child,
 body #info dl dd:last-child {
@@ -206,8 +206,8 @@ ul li a {
 }
 #lists {
   background: #3c3434;
-  width: 124px;
-  height: 600px;
+  width: 13%;
+  height: 100%;
   float: left;
   overflow-y: auto;
 }
@@ -218,7 +218,7 @@ ul li a {
 #lists ul li .number {
   position: absolute;
   text-align: right;
-  width: 124px;
+  width: 100%;
   height: 34px;
   font-size: 34px;
   line-height: 34px;
@@ -244,7 +244,7 @@ ul li a {
   left: 2px;
 }
 #lists ul li a {
-  width: 108px;
+  width: 100%;
   padding: 0 8px;
   color: #dedede;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
@@ -259,8 +259,8 @@ ul li a {
 }
 #list {
   background: #dedede;
-  width: 400px;
-  height: 600px;
+  width: 40%;
+  height: 100%;
   float: left;
   overflow-y: auto;
   box-shadow: -5px 0 5px rgba(0, 0, 0, 0.3);
@@ -268,10 +268,10 @@ ul li a {
 #list ul li span.priority {
   display: block;
   float: left;
-  width: 10px;
+  width: 2%;
   height: 39px;
   border-bottom: 1px solid #dedede;
-  margin-right: 5px;
+  margin-right: 1%;
 }
 #list ul li span.priority-1 {
   background: #ea5200;
@@ -283,7 +283,7 @@ ul li a {
   background: #359aff;
 }
 #list ul li a {
-  width: 400px;
+  width: 100%;
   height: 39px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   color: #3c3434;
@@ -302,7 +302,7 @@ ul li a {
 #list ul li span.task {
   display: block;
   float: left;
-  width: 325px;
+  width: 80%;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -310,24 +310,24 @@ ul li a {
 #list ul li span.due-date {
   display: block;
   float: right;
-  width: 55px;
+  width: 16%;
   height: 15px;
   text-align: right;
   font-size: 15px;
   line-height: 15px;
-  padding: 12px 5px 13px 0;
+  padding: 12px 1% 13px 0;
 }
 #modals {
   position: absolute;
   z-index: 400;
   background: rgba(0, 0, 0, 0.3);
-  width: 1024px;
-  height: 600px;
+  width: 100%;
+  height: 100%;
   display: none;
 }
 #modals .modal {
   position: relative;
-  top: 140px;
+  top: 10%;
   margin: 0 auto;
   padding: 10px;
   width: 600px;

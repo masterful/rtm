@@ -19,7 +19,7 @@ ul {
 }
 #lists {
 	background: @dark-grey;
-	.size( 124px, 600px );
+	.size( 13%, 100% );
 	float: left;
 	overflow-y: auto;
 	ul li {
@@ -28,7 +28,7 @@ ul {
 		.number {
 			position: absolute;
 			text-align: right;
-			.size( 124px, 34px );
+			.size( 100%, 34px );
 			font-size: 34px;
 			line-height: 34px;
 			padding: 3px 0;
@@ -53,7 +53,7 @@ ul {
 			}
 		}
 		a {
-			width: 108px;
+			width: 100%;
 			padding: 0 8px;
 			color: @light-grey;
 			text-shadow: 1px 1px 1px @black-shadow;
@@ -70,7 +70,7 @@ ul {
 }
 #list {
 	background: @light-grey;
-	.size( 400px, 600px );
+	.size( 40%, 100% );
 	float: left;
 	overflow-y: auto;
 	box-shadow: -5px 0 5px @black-shadow;
@@ -78,9 +78,9 @@ ul {
 		span.priority {
 			display: block;
 			float: left;
-			.size( 10px, 39px );
+			.size( 2%, 39px );
 			border-bottom: 1px solid @light-grey;
-			margin-right: 5px;
+			margin-right: 1%;
 		}
 		span.priority-1 {
 			background: @priority-1;
@@ -92,7 +92,7 @@ ul {
 			background: @priority-3;
 		}
 		a {
-			.size( 400px, 39px );
+			.size( 100%, 39px );
 			border-bottom: 1px solid @black-shadow;
 			color: @dark-grey;
 			text-shadow: 0px 0px 1px @black-shadow;
@@ -110,7 +110,7 @@ ul {
 		span.task {
 			display: block;
 			float: left;
-			width: 325px;
+			width: 80%;
 			text-overflow: ellipsis;
 			white-space: nowrap;
 			overflow: hidden;
@@ -118,11 +118,11 @@ ul {
 		span.due-date {
 			display: block;
 			float: right;
-			.size( 55px, 15px );
+			.size( 16%, 15px );
 			text-align: right;
 			font-size: 15px;
 			line-height: 15px;
-			padding: 12px 5px 13px 0;
+			padding: 12px 1% 13px 0;
 		}
 	}
 }
